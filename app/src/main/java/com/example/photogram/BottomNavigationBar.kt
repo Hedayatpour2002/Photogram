@@ -1,6 +1,11 @@
 package com.example.photogram
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -9,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -17,8 +23,8 @@ import androidx.navigation.NavController
 fun BottomNavigationBar(navController: NavController) {
     NavigationBar(
         modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .clip(RoundedCornerShape(topEndPercent = 50, topStartPercent = 50))
+            .clip(RoundedCornerShape(16.dp))
+            .background(Color.Transparent)
     ) {
         val items = Screen.entries
 
@@ -26,7 +32,8 @@ fun BottomNavigationBar(navController: NavController) {
             NavigationBarItem(
                 icon = {
                     Icon(
-                        painter = painterResource(screen.icon), contentDescription = screen.title
+                        painter = painterResource(screen.icon),
+                        contentDescription = screen.title
                     )
                 },
                 label = { Text(text = screen.title) },

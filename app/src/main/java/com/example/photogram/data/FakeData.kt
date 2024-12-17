@@ -19,28 +19,28 @@ object FakeData {
             postID = "2",
             userID = "2",
             location = "Tehran",
-            photoAddress = "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+            photoAddress = "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg",
             title = "City Lights",
             description = "Tehran's city lights at night are mesmerizing."
         ), Post(
             postID = "3",
             userID = "3",
             location = "Shiraz",
-            photoAddress = "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+            photoAddress = "https://letsenhance.io/static/a31ab775f44858f1d1b80ee51738f4f3/11499/EnhanceAfter.jpg",
             title = "Historic Architecture",
             description = "Exploring the ancient architecture of Shiraz."
         ), Post(
             postID = "4",
             userID = "4",
             location = "Esfahan",
-            photoAddress = "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+            photoAddress = "https://f.hellowork.com/blogdumoderateur/2024/04/Midjourney-guide-photorealisme.jpg",
             title = "Bridge at Night",
             description = "The beauty of the Si-o-se-pol bridge under the moonlight."
         ), Post(
             postID = "5",
             userID = "5",
             location = "Mashhad",
-            photoAddress = "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+            photoAddress = "https://huggingface.co/datasets/huggingfacejs/tasks/resolve/main/image-segmentation/image-segmentation-input.jpeg",
             title = "Peaceful Shrine",
             description = "A moment of peace at the holy shrine in Mashhad."
         )
@@ -51,22 +51,22 @@ object FakeData {
             userID = "1", userName = "Ahmad", bio = "I'm a student."
         ), User(
             userID = "2",
-            avatar = "https://sholaemmanuel.com/wp-content/uploads/2024/06/photo-1570295999919-56ceb5ecca61.jpg",
+            avatar = "https://images.unsplash.com/photo-1704791403624-c192488ca4fa?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             userName = "Sara",
             bio = "Photographer and traveler."
         ), User(
             userID = "3",
-            avatar = "https://sholaemmanuel.com/wp-content/uploads/2024/06/photo-1570295999919-56ceb5ecca61.jpg",
+            avatar = "https://plus.unsplash.com/premium_photo-1734203007978-dca43cc0f846?q=80&w=2535&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             userName = "Ali",
             bio = "History enthusiast and writer."
         ), User(
             userID = "4",
-            avatar = "https://sholaemmanuel.com/wp-content/uploads/2024/06/photo-1570295999919-56ceb5ecca61.jpg",
+            avatar = "https://images.unsplash.com/photo-1733175697085-aa500b61ac74?q=80&w=2572&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             userName = "Maryam",
             bio = "Architecture lover and designer."
         ), User(
             userID = "5",
-            avatar = "https://sholaemmanuel.com/wp-content/uploads/2024/06/photo-1570295999919-56ceb5ecca61.jpg",
+            avatar = "https://images.unsplash.com/photo-1731505103716-7ee6fa96dee5?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             userName = "Reza",
             bio = "Tech geek and foodie."
         )
@@ -91,7 +91,11 @@ object FakeData {
     )
 
     private val comments = mutableListOf(
-        Comment(userID = "1", postID = "1", content = "Nice pic")
+        Comment(userID = "1", postID = "1", content = "Nice pic"),
+        Comment(userID = "2", postID = "1", content = "Awesome!"),
+        Comment(userID = "3", postID = "2", content = "Looks great!"),
+        Comment(userID = "4", postID = "1", content = "Amazing work!"),
+        Comment(userID = "5", postID = "2", content = "Fantastic!")
     )
 
     fun getPosts(): List<Post> = posts
@@ -125,8 +129,6 @@ object FakeData {
     fun getUserAvatarById(userId: String): String? {
         return getUserById(userId)?.avatar
     }
-
-    fun getLikes(): List<Like> = likes
 
     fun addLike(userId: String, postId: String) {
         if (!likes.any { it.userID == userId && it.postID == postId }) {
@@ -175,5 +177,11 @@ object FakeData {
 
     fun addComment(comment: Comment) {
         comments.add(comment)
+    }
+
+    fun getAllCommentsByPostID(postId: String): List<Comment> {
+        return comments.filter {
+            postId == it.postID
+        }
     }
 }

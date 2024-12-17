@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,7 +28,12 @@ import com.example.photogram.data.FakeData
 import com.example.photogram.model.Comment
 
 @Composable
-fun CommentInput(postId: String, userId: String, commentCount: MutableIntState) {
+fun CommentInput(
+    postId: String,
+    userId: String,
+    commentCount: MutableIntState,
+    commentList: MutableState<List<Comment>>
+) {
     val commentContent = remember {
         mutableStateOf("")
     }
@@ -36,7 +42,7 @@ fun CommentInput(postId: String, userId: String, commentCount: MutableIntState) 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 0.dp, start = 8.dp, end = 8.dp, bottom = 16.dp),
+            .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedTextField(modifier = Modifier
@@ -57,10 +63,11 @@ fun CommentInput(postId: String, userId: String, commentCount: MutableIntState) 
             onClick = {
                 if (commentContent.value.isNotEmpty()) {
                     val newComment =
-                        Comment(postID = postId, userID = userId, content = commentContent.value)
+                        Comment(postID = postId, userID = "1", content = commentContent.value)
                     FakeData.addComment(newComment)
                     commentContent.value = ""
                     commentCount.intValue = FakeData.commentCount(postId)
+                    commentList.value = FakeData.getAllCommentsByPostID(postId = postId)
                 } else {
                     isErrorComment = true
                 }
