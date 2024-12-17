@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun HomeScreen() {
-    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp)) {
+    Column(modifier = Modifier.fillMaxSize()) {
         HomeHeader()
         PostsScreen()
     }
