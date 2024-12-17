@@ -21,8 +21,4 @@ fun PostsScreen(listState: LazyListState) {
             Spacer(modifier = Modifier.height(80.dp))
         }
     }
-
-//    LaunchedEffect(Unit) {
-//        listState.scrollToItem(0)
-//    }
 }
