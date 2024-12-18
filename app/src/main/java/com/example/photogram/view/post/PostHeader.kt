@@ -58,7 +58,6 @@ fun PostHeader(userID: String, postLocation: String) {
             contentScale = ContentScale.Crop,
             error = painterResource(R.drawable.error_placeholder),
             placeholder = painterResource(R.drawable.loading)
-
         )
         Spacer(modifier = Modifier.width(16.dp))
         Column(modifier = Modifier.weight(1f)) {

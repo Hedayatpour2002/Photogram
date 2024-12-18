@@ -32,7 +32,7 @@ object FakeData {
         ), Post(
             postID = "4",
             userID = "4",
-            location = "Esfahan",
+            location = "Isfahan",
             photoAddress = "https://f.hellowork.com/blogdumoderateur/2024/04/Midjourney-guide-photorealisme.jpg",
             title = "Bridge at Night",
             description = "The beauty of the Si-o-se-pol bridge under the moonlight."
@@ -43,12 +43,30 @@ object FakeData {
             photoAddress = "https://huggingface.co/datasets/huggingfacejs/tasks/resolve/main/image-segmentation/image-segmentation-input.jpeg",
             title = "Peaceful Shrine",
             description = "A moment of peace at the holy shrine in Mashhad."
+        ), Post(
+            postID = "6",
+            userID = "1",
+            location = "Babol",
+            photoAddress = "https://www.thesprucepets.com/thmb/5OSN_p9hUfPssKsJORQDGnAz_tQ=/1963x0/filters:no_upscale():strip_icc()/GettyImages-181861505-4e63227ed0a14dc9bfe86848ef54caf3.jpg",
+            title = "Beautiful Sunset",
+            description = "A stunning view of the sunset in Babol."
+        ),
+        Post(
+            postID = "7",
+            userID = "1",
+            location = "Babol",
+            photoAddress = "https://static.vecteezy.com/system/resources/thumbnails/029/511/467/small_2x/a-group-of-cats-taking-a-selfie-on-a-blurred-background-generative-ai-photo.jpg",
+            title = "Beautiful Sunset",
+            description = "A stunning view of the sunset in Babol."
         )
     )
 
     private val users = mutableListOf(
         User(
-            userID = "1", userName = "Ahmad", bio = "I'm a student."
+            userID = "1",
+            avatar = "https://cdn.britannica.com/36/234736-050-4AC5B6D5/Scottish-fold-cat.jpg",
+            userName = "Ahmad",
+            bio = "I'm a student."
         ), User(
             userID = "2",
             avatar = "https://images.unsplash.com/photo-1704791403624-c192488ca4fa?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -114,6 +132,16 @@ object FakeData {
 
     fun getUsers(): List<User> = users
 
+    fun searchUsersByUsername(searchText: String): List<User> {
+        return if (searchText.isBlank()) {
+            emptyList()
+        } else {
+            val regex = Regex(searchText, RegexOption.IGNORE_CASE)
+            getUsers().filter { it.userName.contains(regex) }
+        }
+    }
+
+
     fun addUser(user: User) {
         users.add(user)
     }
@@ -128,6 +156,23 @@ object FakeData {
 
     fun getUserAvatarById(userId: String): String? {
         return getUserById(userId)?.avatar
+    }
+
+    fun getUserPosts(userId: String): List<Post> {
+        return posts.filter { userId == it.userID }
+    }
+    fun getUserLikedPosts(userId: String): List<Post> {
+        val likedPosts = likes.filter { userId == it.userID }
+        val likedPostIds = likedPosts.map { it.postID }
+
+        return posts.filter { it.postID in likedPostIds }
+    }
+
+    fun getUserSavedPosts(userId: String): List<Post> {
+        val savedPosts = bookmarks.filter { userId == it.userID }
+        val savedPostIds = savedPosts.map { it.postID }
+
+        return posts.filter { it.postID in savedPostIds }
     }
 
     fun addLike(userId: String, postId: String) {

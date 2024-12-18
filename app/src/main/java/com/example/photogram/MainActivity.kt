@@ -36,9 +36,7 @@ class MainActivity : ComponentActivity() {
                         NavigationHost(
                             navController = navController, modifier = Modifier.padding(innerPadding)
                         )
-
                         BottomNavigationBar(navController = navController, modifier = Modifier.padding(innerPadding))
-
                     }
                 }
             }

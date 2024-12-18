@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen(listState: LazyListState) {
-    Column(modifier = Modifier.fillMaxSize()) {
+fun HomeScreen(listState: LazyListState, modifier: Modifier) {
+    Column(modifier = modifier.fillMaxSize()) {
         HomeHeader()
         PostsScreen(listState = listState)
     }

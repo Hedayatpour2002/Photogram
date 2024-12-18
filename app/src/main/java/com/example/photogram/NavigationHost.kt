@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.photogram.view.home.HomeScreen
 import com.example.photogram.view.profile.ProfileScreen
-
+import com.example.photogram.view.search.SearchScreen
 
 @Composable
 fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -24,13 +24,12 @@ fun NavigationHost(navController: NavHostController, modifier: Modifier = Modifi
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route,
-        modifier = modifier.padding(horizontal = 8.dp)
     ) {
         composable(Screen.Home.route) {
-            HomeScreen(listState = listState)
+            HomeScreen(listState = listState, modifier = modifier.padding(horizontal = 8.dp))
         }
         composable(Screen.Search.route) {
-//                                SearchScreen()
+            SearchScreen(modifier = modifier.padding(horizontal = 8.dp))
         }
         composable(Screen.Profile.route) {
             ProfileScreen()

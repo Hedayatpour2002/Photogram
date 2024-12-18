@@ -29,7 +29,7 @@ import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
 import com.exyte.animatednavbar.utils.noRippleClickable
 
 @Composable
-fun BottomNavigationBar(navController: NavController, modifier: Modifier) {
+fun BottomNavigationBar(navController: NavController, modifier: Modifier = Modifier) {
     val navigationBarItems = remember { Screen.entries.toTypedArray() }
     var selectedIndex by remember { mutableIntStateOf(0) }
 
