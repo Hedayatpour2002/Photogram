@@ -22,6 +22,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.exyte.animatednavbar.AnimatedNavigationBar
 import com.exyte.animatednavbar.animation.balltrajectory.Parabolic
 import com.exyte.animatednavbar.animation.indendshape.Height
@@ -31,8 +32,10 @@ import com.exyte.animatednavbar.utils.noRippleClickable
 @Composable
 fun BottomNavigationBar(navController: NavController, modifier: Modifier = Modifier) {
     val navigationBarItems = remember { Screen.entries.toTypedArray() }
-    var selectedIndex by remember { mutableIntStateOf(0) }
-
+//    var selectedIndex by remember { mutableIntStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination?.route
+    var selectedIndex = Screen.entries.map { it.route }.indexOf(currentDestination)
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
     ) {
